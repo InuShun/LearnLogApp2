@@ -23,9 +23,13 @@ function App() {
   useEffect(() => {
     const getRecords = async () => {
       setIsLoading(true);
+
       const records = await getAllRecords();
       setRecords(records);
-      setTotalTime(totalTime + parseInt(records.time))
+
+      const total = records.reduce((sum, record) => sum + parseInt(record.time || 0), 0);
+      setTotalTime(total);
+
       setIsLoading(false);
     };
     getRecords();
@@ -39,7 +43,9 @@ function App() {
       setTitle("")
       setTime(0)
       setError("")
-      setTotalTime(totalTime + parseInt(time))
+      
+      const total = records.reduce((sum, record) => sum + parseInt(record.time || 0), 0);
+      setTotalTime(total);
 
       const records = await getAllRecords();
       setRecords(records);
