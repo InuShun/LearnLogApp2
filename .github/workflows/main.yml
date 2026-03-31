@@ -19,6 +19,13 @@ jobs:
         run: npm install
       - name: Run build
         run: npm run build
+        
+      ##ビルドでできた dist フォルダをデプロイで使えるように保存
+      - name: Upload build-artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist
 
   deploy:
     name: deploy
@@ -32,6 +39,14 @@ jobs:
         with:
           node-version: "24.8.0"
           cache: "npm"
+          
+      ## ビルドジョブで生成＆保存されたdistフォルダを取得
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+          path: dist
+          
       - name: Install firebase-tools
         run: npm install --save-dev firebase-tools
       - name: Decode Firebase service account key
