@@ -5,4 +5,9 @@ import env from 'vite-plugin-env-compatible';
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), env({ prefix: 'VITE', mountedPath: 'import.meta.env' })],
-})
+  test: {
+    globals: true,
+    environment: "jsdom",
+    setupFiles: ["./vitest-setup.js"],
+  },
+});
