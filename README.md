@@ -1,16 +1,65 @@
-# React + Vite
+# 学習記録アプリ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+学習内容と学習時間を記録できるアプリです。
 
-Currently, two official plugins are available:
+日々、学んだことを振り返ることが出来ます。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 機能一覧
 
-## React Compiler
+- 学習内容、学習時間を入力して登録が出来る。
+- 登録した内容は一覧に羅列される。
+- 登録内容は削除することが出来る。
+- 登録した内容の合計時間を見ることが出来る。
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 技術スタック
 
-## Expanding the ESLint configuration
+- フロントエンド：React 19
+- バックエンド：SupaBase
+- ビルドツール：Vite
+- テスト:Vitest
+- デプロイ:Firebase
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 起動方法
+
+前提条件：Node.jsがインストールされていること
+
+1. リポジトリのクローン
+```bash
+git clone https://github.com/InuShun/LearnLogApp2.git
+```
+
+2. 依存関係のインストール
+```bash
+npm install
+```
+
+3. 環境変数の設定
+- Supabaseでアカウントとプロジェクトを作成する。
+
+- 作成したプロジェクト内に以下のテーブルを作成する。
+
+テーブル名： study-record
+
+| Name | Type | Constraints |
+|------|------|-------------|
+| `id` | `uuid` | Primary |
+| `title` | `varchar` |  |
+| `time` | `int4` |  |
+| `created_at` | `timestamp` |  Nullable |
+
+
+- Gitでクローンしたリポジトリに、「.envファイル」をリポジトリ直下に作成する。
+
+- .envファイルに以下のようにSUPABASE_URLとSUPABASE_ANON_KEYを記載する。それぞれの確認方法はコメント参照。
+```bash
+//Supabase → Project Settings → Data API → 「API URL」
+VITE_SUPABASE_URL={SUPABASE_URL}
+
+//Supabase → Project Settings → API Keys → Legacy anon, service_role API keys → 「anon public」
+VITE_SUPABASE_ANON_KEY={SUPABASE_ANON_KEY}
+```
+
+4. 起動
+```bash
+npm run dev
+```
