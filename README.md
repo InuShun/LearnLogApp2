@@ -16,8 +16,8 @@
 - フロントエンド：React 19
 - バックエンド：SupaBase
 - ビルドツール：Vite
-- テスト:Vitest
-- デプロイ:Firebase
+- テスト:Vitest、React Testing Library
+- デプロイ:Firebase Hosting
 
 ## 起動方法
 
